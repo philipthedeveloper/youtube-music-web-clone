@@ -330,11 +330,12 @@ const ProfieImageContainer = styled.div`
 const TopNavModal = styled.div`
   width: 300px;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgb(50, 50, 50);
   position: absolute;
   top: 100%;
   display: none;
   padding-bottom: 1rem;
+  z-index: 100;
 
   &.show {
     display: block;
