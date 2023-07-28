@@ -1,0 +1,39 @@
+:root {
+  --primary-color: #e92a08;
+  --blue: #3ea6ff;
+  --main-background: #24282c;
+  --white: #e8f0e8;
+  --shadow: #181d28;
+  --black: #181a25;
+  --trans-white: rgba(255, 255, 255, 0.2);
+  --secondary-font: "Dosis", sans-serif;
+  --base-font: "Roboto", sans-serif;
+  scroll-behavior: smooth !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--base-font);
+}
+
+body {
+  background-color: var(--main-background);
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 65px 1fr;
+  height: 100vh;
+  width: 100%;
+  /* overflow: hidden; */
+  transition: 0.4s ease;
+}
+
+@media screen and (max-width: 920px) {
+  .App.hide-nav {
+    grid-template-columns: 100px 1fr;
+  }
+}
