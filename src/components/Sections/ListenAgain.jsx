@@ -14,7 +14,7 @@ const ListenAgain = () => {
     let contScrollWidth = cardContainerRef?.current?.scrollWidth;
     let currentScroll = cardContainerRef.current.scrollLeft;
     let visibleWidth = cardContainerRef?.current.getBoundingClientRect().width;
-    if (value > 0) {
+    if (value && value > 0) {
       let availableScroll = contScrollWidth - currentScroll - visibleWidth;
       if (availableScroll > visibleWidth) {
         let scrollingTo = currentScroll + visibleWidth;
@@ -34,7 +34,7 @@ const ListenAgain = () => {
         setIsForwardButtonVisible(false);
         setIsBackButtonVisible(true);
       }
-    } else if (value < 0) {
+    } else if (value && value < 0) {
       let availableScroll = currentScroll - visibleWidth;
       if (availableScroll > 0) {
         cardContainerRef.current.scrollTo({
@@ -53,6 +53,20 @@ const ListenAgain = () => {
         setIsForwardButtonVisible(true);
         setIsBackButtonVisible(false);
       }
+    } else {
+      if (
+        currentScroll > 0 &&
+        !(currentScroll >= contScrollWidth - visibleWidth)
+      ) {
+        setIsForwardButtonVisible(true);
+        setIsBackButtonVisible(true);
+      } else if (currentScroll === 0) {
+        setIsForwardButtonVisible(true);
+        setIsBackButtonVisible(false);
+      } else {
+        setIsForwardButtonVisible(false);
+        setIsBackButtonVisible(true);
+      }
     }
   };
 
@@ -64,7 +78,10 @@ const ListenAgain = () => {
         isForwardButtonVisible={isForwardButtonVisible}
       />
       <Container ref={parentCardContainerRef}>
-        <ListenCardContainer ref={cardContainerRef}>
+        <ListenCardContainer
+          ref={cardContainerRef}
+          onScroll={() => handleScroll(null)}
+        >
           {data.map((data, index) => {
             if (index % 3 === 0 || index % 5 === 0) {
               return <AudioMediaCard data={data} key={index} />;
